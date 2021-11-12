@@ -9,7 +9,7 @@ app.use(express.json());
 const hashtable = {};
 
 app.post('/memory/:key', (req, res) => {
-    hashtable;e[req.params.key] = req.body.data;
+    hashtable[req.params.key] = req.body.data;
     res.send();
 });
 
@@ -22,14 +22,14 @@ app.get('/memory/:key', (req, res) => {
 });
 
 app.post('/disk/:key', (req, res) => {
-    const destinationFile = `${DATA_DIR}/${req.params.key}`;
+    const destinationFile = `${DATA_DIR}/${req.params.key}.txt`;
     fs.writeFileSync(destinationFile, req.body.data);
     res.send();
 });
 
 app.get('/disk/:key', (req, res) => {
-    const destinationFile = `${DATA_DIR}/${req.params.key}`;
-
+    const destinationFile = `${DATA_DIR}/${req.params.key}.txt`;
+    console.log(destinationFile);
     try {
         const data = fs.readFileSync(destinationFile);
     } catch (e) {
